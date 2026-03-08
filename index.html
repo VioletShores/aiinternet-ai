@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The AI Internet — Identity, Trust & Routing Infrastructure for AI Agents</title>
+<meta name="description" content="We are building the identity, trust, and routing infrastructure for the AI agent economy. 458 patent claims filed. Live product. Four AI providers.">
+<meta property="og:title" content="The AI Internet — Infrastructure for the AI Agent Economy">
+<meta property="og:description" content="Identity, trust, and routing infrastructure for AI agents. By Violet Shores.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://aiinternet.ai">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #07090F;
+  --bg-2: #0C0F18;
+  --bg-card: #111420;
+  --border: #1A1E2E;
+  --border-h: #252A3A;
+  --teal: #2DD4BF;
+  --teal-dim: rgba(45,212,191,.12);
+  --teal-glow: rgba(45,212,191,.06);
+  --emerald: #10B981;
+  --purple: #7C3AED;
+  --amber: #F59E0B;
+  --coral: #F96167;
+  --blue: #3B82F6;
+  --white: #F0F2F5;
+  --gray: #9CA3AF;
+  --muted: #5C6174;
+  --mono: 'JetBrains Mono', monospace;
+  --sans: 'Plus Jakarta Sans', -apple-system, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: var(--sans);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Grain overlay ─── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ─── Nav ─── */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 16px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(7,9,15,.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.nav-wordmark {
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: var(--teal);
+  text-transform: uppercase;
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+
+.nav-links a {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--gray);
+  text-decoration: none;
+  transition: color .2s;
+  letter-spacing: .3px;
+}
+
+.nav-links a:hover { color: var(--white); }
+
+.nav-cta {
+  padding: 8px 20px !important;
+  background: var(--teal) !important;
+  color: var(--bg) !important;
+  border-radius: 6px;
+  font-weight: 600 !important;
+  font-size: 12px !important;
+  letter-spacing: .5px !important;
+  transition: all .2s !important;
+}
+
+.nav-cta:hover { opacity: .9; transform: translateY(-1px); }
+
+/* ─── Hero ─── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 120px 24px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -40%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 900px;
+  height: 900px;
+  background: radial-gradient(circle, rgba(45,212,191,.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-badge {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--teal);
+  padding: 8px 20px;
+  border: 1px solid rgba(45,212,191,.25);
+  border-radius: 100px;
+  margin-bottom: 32px;
+  display: inline-block;
+  background: var(--teal-glow);
+}
+
+.hero h1 {
+  font-size: clamp(42px, 6vw, 72px);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -2px;
+  max-width: 820px;
+  margin-bottom: 24px;
+}
+
+.hero h1 .gradient {
+  background: linear-gradient(135deg, var(--teal), var(--emerald), var(--blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-sub {
+  font-size: 18px;
+  color: var(--gray);
+  max-width: 600px;
+  line-height: 1.7;
+  margin-bottom: 48px;
+  font-weight: 400;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all .25s;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: var(--teal);
+  color: var(--bg);
+}
+
+.btn-primary:hover { box-shadow: 0 0 30px rgba(45,212,191,.3); transform: translateY(-2px); }
+
+.btn-secondary {
+  background: transparent;
+  color: var(--white);
+  border: 1px solid var(--border-h);
+}
+
+.btn-secondary:hover { border-color: var(--teal); color: var(--teal); }
+
+/* ─── Stats bar ─── */
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: 64px;
+  padding: 48px 24px;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-2);
+}
+
+.stat { text-align: center; }
+
+.stat-num {
+  font-family: var(--mono);
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--teal);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.stat-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* ─── Problem ─── */
+.problem {
+  padding: 120px 24px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.section-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 16px;
+}
+
+.problem h2 {
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -.5px;
+  margin-bottom: 32px;
+}
+
+.problem-text {
+  font-size: 17px;
+  color: var(--gray);
+  line-height: 1.8;
+  margin-bottom: 24px;
+}
+
+.problem-text strong { color: var(--white); font-weight: 600; }
+
+/* ─── Stack ─── */
+.stack {
+  padding: 120px 24px;
+  background: var(--bg-2);
+}
+
+.stack-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.stack h2 {
+  font-size: 36px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 16px;
+  letter-spacing: -.5px;
+}
+
+.stack-sub {
+  text-align: center;
+  color: var(--gray);
+  font-size: 17px;
+  margin-bottom: 64px;
+  max-width: 650px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.layers {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.layer {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 0;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all .3s;
+}
+
+.layer:hover {
+  border-color: var(--border-h);
+  transform: translateX(4px);
+}
+
+.layer-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--bg);
+  min-height: 100%;
+}
+
+.layer:nth-child(1) .layer-num { background: var(--purple); }
+.layer:nth-child(2) .layer-num { background: var(--teal); }
+.layer:nth-child(3) .layer-num { background: var(--emerald); }
+.layer:nth-child(4) .layer-num { background: var(--amber); }
+.layer:nth-child(5) .layer-num { background: var(--blue); }
+
+.layer-content {
+  padding: 28px 32px;
+}
+
+.layer-header {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.layer-name {
+  font-family: var(--mono);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: .5px;
+}
+
+.layer-product {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.layer-desc {
+  font-size: 14px;
+  color: var(--gray);
+  line-height: 1.7;
+}
+
+.layer-analogy {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+
+/* ─── Demo ─── */
+.demo {
+  padding: 120px 24px;
+  text-align: center;
+}
+
+.demo-inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.demo h2 {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  letter-spacing: -.5px;
+}
+
+.demo-sub {
+  color: var(--gray);
+  font-size: 17px;
+  margin-bottom: 48px;
+}
+
+.demo-embed {
+  position: relative;
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  aspect-ratio: 16/9;
+}
+
+.demo-embed iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.demo-link {
+  margin-top: 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--teal);
+  text-decoration: none;
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 600;
+  transition: opacity .2s;
+}
+
+.demo-link:hover { opacity: .8; }
+
+/* ─── Moat ─── */
+.moat {
+  padding: 120px 24px;
+  background: var(--bg-2);
+}
+
+.moat-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.moat h2 {
+  font-size: 36px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 64px;
+  letter-spacing: -.5px;
+}
+
+.moat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.moat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 32px 28px;
+  transition: all .3s;
+}
+
+.moat-card:hover { border-color: var(--border-h); transform: translateY(-4px); }
+
+.moat-icon {
+  font-size: 28px;
+  margin-bottom: 16px;
+}
+
+.moat-card h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  letter-spacing: -.2px;
+}
+
+.moat-card p {
+  font-size: 14px;
+  color: var(--gray);
+  line-height: 1.7;
+}
+
+/* ─── IP ─── */
+.ip {
+  padding: 120px 24px;
+}
+
+.ip-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.ip h2 {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  letter-spacing: -.5px;
+}
+
+.ip-sub {
+  color: var(--gray);
+  font-size: 17px;
+  margin-bottom: 48px;
+}
+
+.ip-patents {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  text-align: left;
+}
+
+.ip-patent {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 24px;
+}
+
+.ip-patent-title {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--teal);
+  margin-bottom: 6px;
+}
+
+.ip-patent-claims {
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.ip-patent-desc {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.ip-total {
+  margin-top: 24px;
+  padding: 24px;
+  background: var(--teal-dim);
+  border: 1px solid rgba(45,212,191,.2);
+  border-radius: 10px;
+}
+
+.ip-total-num {
+  font-family: var(--mono);
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--teal);
+  line-height: 1;
+}
+
+.ip-total-label {
+  font-size: 14px;
+  color: var(--gray);
+  margin-top: 4px;
+}
+
+/* ─── Analogies ─── */
+.analogies {
+  padding: 80px 24px 120px;
+  text-align: center;
+}
+
+.analogy-row {
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  flex-wrap: wrap;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.analogy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.analogy-what {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.analogy-arrow {
+  font-family: var(--mono);
+  color: var(--teal);
+  font-size: 13px;
+}
+
+.analogy-us {
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--white);
+}
+
+/* ─── CTA ─── */
+.cta {
+  padding: 120px 24px;
+  text-align: center;
+  background: var(--bg-2);
+  border-top: 1px solid var(--border);
+}
+
+.cta h2 {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  letter-spacing: -.5px;
+}
+
+.cta-sub {
+  color: var(--gray);
+  font-size: 17px;
+  margin-bottom: 40px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ─── Footer ─── */
+footer {
+  padding: 40px 24px;
+  text-align: center;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--muted);
+}
+
+footer a {
+  color: var(--gray);
+  text-decoration: none;
+}
+
+footer a:hover { color: var(--teal); }
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 16px;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 768px) {
+  nav { padding: 12px 20px; }
+  .nav-links { display: none; }
+  .stats { flex-wrap: wrap; gap: 32px; }
+  .moat-grid { grid-template-columns: 1fr; }
+  .ip-patents { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 36px; letter-spacing: -1px; }
+  .hero-sub { font-size: 16px; }
+  .layer { grid-template-columns: 44px 1fr; }
+  .analogy-row { gap: 32px; }
+}
+
+/* ─── Animations ─── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-badge { animation: fadeUp .6s ease both; }
+.hero h1 { animation: fadeUp .6s ease .1s both; }
+.hero-sub { animation: fadeUp .6s ease .2s both; }
+.hero-actions { animation: fadeUp .6s ease .3s both; }
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav>
+  <a href="/" class="nav-logo">
+    <span class="nav-wordmark">The AI Internet</span>
+  </a>
+  <div class="nav-links">
+    <a href="#problem">Problem</a>
+    <a href="#stack">The Stack</a>
+    <a href="#demo">Live Demo</a>
+    <a href="#ip">Patents</a>
+    <a href="https://vacprotocol.org/compare" class="nav-cta" target="_blank">Try SignalRank →</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="top">
+  <div class="hero-badge">Infrastructure for the AI Agent Economy</div>
+  <h1>The <span class="gradient">trust layer</span> the AI internet is missing</h1>
+  <p class="hero-sub">AI agents have no identity, no trust, and no way to verify their reasoning. We're building the protocols that fix that — from biometric human identity to trust-weighted routing across every model.</p>
+  <div class="hero-actions">
+    <a href="https://vacprotocol.org/compare" class="btn btn-primary" target="_blank">Try SignalRank Live →</a>
+    <a href="https://vacprotocol.org" class="btn btn-secondary" target="_blank">VAC Protocol ↗</a>
+  </div>
+</section>
+
+<!-- Stats -->
+<section class="stats">
+  <div class="stat">
+    <div class="stat-num">458</div>
+    <div class="stat-label">Patent Claims Filed</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">10</div>
+    <div class="stat-label">IP Filings</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">4</div>
+    <div class="stat-label">LLM Providers Live</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">5</div>
+    <div class="stat-label">Infrastructure Layers</div>
+  </div>
+</section>
+
+<!-- Problem -->
+<section class="problem" id="problem">
+  <div class="section-label">The Problem</div>
+  <h2>Every AI gives you a different answer. Which one do you trust?</h2>
+  <p class="problem-text">When you ask Claude a medical question, you get one answer. Ask GPT, you get another. Gemini gives a third. <strong>They disagree on financial advice, medical guidance, political analysis, and legal interpretation.</strong></p>
+  <p class="problem-text">Right now there's no infrastructure to tell you which model to trust, for which topic, based on your context. No way to verify the reasoning. No way to prove a verified human authorised the agent acting on your behalf. No audit trail linking action to intent.</p>
+  <p class="problem-text"><strong>The internet had this problem once.</strong> Millions of web pages, no way to know which ones mattered. Then DNS gave them names. TCP/IP gave them connectivity. PageRank gave them trust. We're building the same layers — for AI.</p>
+</section>
+
+<!-- Stack -->
+<section class="stack" id="stack">
+  <div class="stack-inner">
+    <div class="section-label" style="text-align:center">The Stack</div>
+    <h2>Five infrastructure layers</h2>
+    <p class="stack-sub">The same way the internet was built on IP, DNS, HTTP, and PageRank — the AI internet needs identity, trust, routing, reasoning, and orchestration.</p>
+
+    <div class="layers">
+      <div class="layer">
+        <div class="layer-num">01</div>
+        <div class="layer-content">
+          <div class="layer-header">
+            <span class="layer-name">Human Identity</span>
+            <span class="layer-product">FolioAI</span>
+          </div>
+          <div class="layer-desc">Multi-modal biometric verification creates the human identity graph. Verified humans — not bots, not shared credentials. The root of every agent chain traces to a real person.</div>
+          <div class="layer-analogy">≈ DNS gave websites names → FolioAI gives humans verified identity</div>
+        </div>
+      </div>
+
+      <div class="layer">
+        <div class="layer-num">02</div>
+        <div class="layer-content">
+          <div class="layer-header">
+            <span class="layer-name">Agent Trust</span>
+            <span class="layer-product">VAC Protocol</span>
+          </div>
+          <div class="layer-desc">Cryptographic Verified Authority Tokens link AI agents to verified humans. Trust narrows through delegation chains — never expands. Instant cascade revocation. Provenance at every step.</div>
+          <div class="layer-analogy">≈ HTTPS secured web traffic → VAC secures AI agent authority</div>
+        </div>
+      </div>
+
+      <div class="layer">
+        <div class="layer-num">03</div>
+        <div class="layer-content">
+          <div class="layer-header">
+            <span class="layer-name">Trust-Weighted Routing</span>
+            <span class="layer-product">SignalRank</span>
+          </div>
+          <div class="layer-desc">PageRank ranked web pages. SignalRank ranks intelligence. It learns which AI model to trust, for which topic, for which user — and routes accordingly. Per-user personalised trust profiles.</div>
+          <div class="layer-analogy">≈ PageRank ranked pages by authority → SignalRank ranks models by trust</div>
+        </div>
+      </div>
+
+      <div class="layer">
+        <div class="layer-num">04</div>
+        <div class="layer-content">
+          <div class="layer-header">
+            <span class="layer-name">Reasoning Provenance</span>
+            <span class="layer-product">Reasoning Path Index</span>
+          </div>
+          <div class="layer-desc">Google indexed documents. We index reasoning. Every AI answer carries a complete audit trail — which model, what reasoning path, what confidence, what it refused to answer. Searchable, reusable, provenance-tracked.</div>
+          <div class="layer-analogy">≈ Google indexed web pages → RPI indexes AI reasoning workflows</div>
+        </div>
+      </div>
+
+      <div class="layer">
+        <div class="layer-num">05</div>
+        <div class="layer-content">
+          <div class="layer-header">
+            <span class="layer-name">Orchestration</span>
+            <span class="layer-product">Athena</span>
+          </div>
+          <div class="layer-desc">The intelligent layer that ties it all together. Describes your problem in natural language, Athena recommends and deploys the right agent team — routed through SignalRank, authorised through VAC, tracked through RPI.</div>
+          <div class="layer-analogy">≈ HTTP connected services → Athena orchestrates AI agents</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Demo -->
+<section class="demo" id="demo">
+  <div class="demo-inner">
+    <div class="section-label">Live Product</div>
+    <h2>SignalRank Live</h2>
+    <p class="demo-sub">Ask one question. Get answers from Claude, GPT-4o, Gemini, and Grok simultaneously. See trust scores, restriction maps, hedging detection, and consensus analysis — in real time.</p>
+    <div class="demo-embed">
+      <iframe src="https://www.loom.com/embed/2c4eac2e135a40de9eb2bb8dde2e3be3" allowfullscreen></iframe>
+    </div>
+    <a href="https://vacprotocol.org/compare" class="demo-link" target="_blank">Try it yourself → vacprotocol.org/compare</a>
+  </div>
+</section>
+
+<!-- Moat -->
+<section class="moat">
+  <div class="moat-inner">
+    <div class="section-label" style="text-align:center">Defensible Moat</div>
+    <h2>Three compounding network effects</h2>
+    <div class="moat-grid">
+      <div class="moat-card">
+        <div class="moat-icon">📊</div>
+        <h3>Trust Graph</h3>
+        <p>Every comparison enriches the trust graph. More queries mean more accurate model rankings per domain. The graph compounds — it gets smarter with every use.</p>
+      </div>
+      <div class="moat-card">
+        <div class="moat-icon">🧠</div>
+        <h3>Reasoning Index</h3>
+        <p>Reasoning paths accumulate as reusable intelligence. Common workflows get indexed, searchable, and eventually trainable. The index is the asset.</p>
+      </div>
+      <div class="moat-card">
+        <div class="moat-icon">🔒</div>
+        <h3>Personal Trust Profiles</h3>
+        <p>Your trust profile and local models don't exist anywhere else. Per-user personalisation creates switching costs — your data trains models that work for you.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IP -->
+<section class="ip" id="ip">
+  <div class="ip-inner">
+    <div class="section-label">Intellectual Property</div>
+    <h2>Patent Pending</h2>
+    <p class="ip-sub">Two patent families covering identity, trust, routing, reasoning provenance, orchestration, physical system authority, collective governance, and coalition operations.</p>
+
+    <div class="ip-patents">
+      <div class="ip-patent">
+        <div class="ip-patent-title">VAC Protocol</div>
+        <div class="ip-patent-claims">285 claims</div>
+        <div class="ip-patent-desc">Biometric identity, agent delegation, trust propagation, regulatory provenance, physical systems, coalition governance</div>
+      </div>
+      <div class="ip-patent">
+        <div class="ip-patent-title">Athena / SignalRank</div>
+        <div class="ip-patent-claims">173 claims</div>
+        <div class="ip-patent-desc">Self-improving methodology, multi-LLM trust ranking, reasoning path indexing, training data detection, agent orchestration</div>
+      </div>
+    </div>
+
+    <div class="ip-total">
+      <div class="ip-total-num">458</div>
+      <div class="ip-total-label">total claims across 10 filings with IP Australia — all Patent Pending</div>
+    </div>
+  </div>
+</section>
+
+<!-- Analogies -->
+<section class="analogies">
+  <div class="analogy-row">
+    <div class="analogy">
+      <div class="analogy-what">Stripe → Payments</div>
+      <div class="analogy-arrow">↔</div>
+      <div class="analogy-us">We → Trust</div>
+    </div>
+    <div class="analogy">
+      <div class="analogy-what">Cloudflare → Security</div>
+      <div class="analogy-arrow">↔</div>
+      <div class="analogy-us">We → Identity</div>
+    </div>
+    <div class="analogy">
+      <div class="analogy-what">PageRank → Web pages</div>
+      <div class="analogy-arrow">↔</div>
+      <div class="analogy-us">SignalRank → AI models</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="section-label">Get Started</div>
+  <h2>See it for yourself</h2>
+  <p class="cta-sub">SignalRank Live is running now. Compare AI models, see the trust layer in action, and decide for yourself.</p>
+  <div class="hero-actions">
+    <a href="https://vacprotocol.org/compare" class="btn btn-primary" target="_blank">Try SignalRank Live →</a>
+    <a href="https://vacprotocol.org/vac-whitepaper-v4.pdf" class="btn btn-secondary" target="_blank">Read the Whitepaper</a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-links">
+    <a href="https://vacprotocol.org" target="_blank">VAC Protocol</a>
+    <a href="https://athenapilot.ai" target="_blank">Athena</a>
+    <a href="mailto:admin@violetshores.com">Contact</a>
+  </div>
+  <p>&copy; 2026 Violet Shores Pty Ltd. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
