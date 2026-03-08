@@ -413,23 +413,60 @@ nav {
   margin-bottom: 48px;
 }
 
-.demo-embed {
+.demo-thumb {
   position: relative;
+  display: block;
   width: 100%;
   border-radius: 16px;
   overflow: hidden;
   border: 1px solid var(--border);
-  background: var(--bg-card);
-  aspect-ratio: 16/9;
+  background: #000;
+  transition: all .3s;
 }
 
-.demo-embed iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
+.demo-thumb:hover { border-color: var(--teal); box-shadow: 0 0 40px rgba(45,212,191,.15); }
+
+.demo-thumb img {
   width: 100%;
-  height: 100%;
-  border: none;
+  display: block;
+  opacity: .7;
+  transition: opacity .3s;
+}
+
+.demo-thumb:hover img { opacity: .5; }
+
+.demo-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 72px;
+  height: 72px;
+  background: var(--teal);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .3s;
+  box-shadow: 0 0 40px rgba(45,212,191,.3);
+}
+
+.demo-play svg { width: 28px; height: 28px; color: var(--bg); margin-left: 3px; }
+
+.demo-thumb:hover .demo-play { transform: translate(-50%, -50%) scale(1.1); box-shadow: 0 0 60px rgba(45,212,191,.4); }
+
+.demo-play-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, calc(-50% + 52px));
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--white);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .demo-link {
@@ -842,9 +879,13 @@ footer a:hover { color: var(--teal); }
     <div class="section-label">Live Product</div>
     <h2>SignalRank Live</h2>
     <p class="demo-sub">Ask one question. Get answers from Claude, GPT-4o, Gemini, and Grok simultaneously. See trust scores, restriction maps, hedging detection, and consensus analysis — in real time.</p>
-    <div class="demo-embed" style="background:#000">
-      <iframe src="https://www.loom.com/embed/2c4eac2e135a40de9eb2bb8dde2e3be3?sid=1&hide_owner=true&hide_title=true&hideEmbedTopBar=true" allowfullscreen allow="autoplay; fullscreen" style="background:#000"></iframe>
-    </div>
+    <a href="https://www.loom.com/share/2c4eac2e135a40de9eb2bb8dde2e3be3" target="_blank" class="demo-thumb">
+      <img src="https://cdn.loom.com/sessions/thumbnails/2c4eac2e135a40de9eb2bb8dde2e3be3-00001.jpg" alt="SignalRank Live Demo" />
+      <div class="demo-play">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="6,3 20,12 6,21"/></svg>
+      </div>
+      <div class="demo-play-label">Watch 3-min demo</div>
+    </a>
     <a href="https://vacprotocol.org/compare" class="demo-link" target="_blank">Try it yourself → vacprotocol.org/compare</a>
   </div>
 </section>
