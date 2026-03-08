@@ -483,9 +483,26 @@ nav {
 .moat-card:hover { border-color: var(--border-h); transform: translateY(-4px); }
 
 .moat-icon {
-  font-size: 28px;
-  margin-bottom: 16px;
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
 }
+
+.moat-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.moat-icon-trust { background: rgba(45,212,191,.1); border: 1px solid rgba(45,212,191,.2); }
+.moat-icon-trust svg { stroke: var(--teal); }
+.moat-icon-reasoning { background: rgba(124,58,237,.1); border: 1px solid rgba(124,58,237,.2); }
+.moat-icon-reasoning svg { stroke: var(--purple); }
+.moat-icon-profile { background: rgba(16,185,129,.1); border: 1px solid rgba(16,185,129,.2); }
+.moat-icon-profile svg { stroke: var(--emerald); }
 
 .moat-card h3 {
   font-size: 16px;
@@ -715,7 +732,7 @@ footer a:hover { color: var(--teal); }
   <p class="hero-sub">AI agents have no identity, no trust, and no way to verify their reasoning. We're building the protocols that fix that — from biometric human identity to trust-weighted routing across every model.</p>
   <div class="hero-actions">
     <a href="https://vacprotocol.org/compare" class="btn btn-primary" target="_blank">Try SignalRank Live →</a>
-    <a href="https://vacprotocol.org" class="btn btn-secondary" target="_blank">VAC Protocol ↗</a>
+    <a href="https://vacprotocol.org" class="btn btn-secondary" target="_blank">VAC Protocol →</a>
   </div>
 </section>
 
@@ -825,8 +842,8 @@ footer a:hover { color: var(--teal); }
     <div class="section-label">Live Product</div>
     <h2>SignalRank Live</h2>
     <p class="demo-sub">Ask one question. Get answers from Claude, GPT-4o, Gemini, and Grok simultaneously. See trust scores, restriction maps, hedging detection, and consensus analysis — in real time.</p>
-    <div class="demo-embed">
-      <iframe src="https://www.loom.com/embed/2c4eac2e135a40de9eb2bb8dde2e3be3" allowfullscreen></iframe>
+    <div class="demo-embed" style="background:#000">
+      <iframe src="https://www.loom.com/embed/2c4eac2e135a40de9eb2bb8dde2e3be3?sid=1&hide_owner=true&hide_title=true&hideEmbedTopBar=true" allowfullscreen allow="autoplay; fullscreen" style="background:#000"></iframe>
     </div>
     <a href="https://vacprotocol.org/compare" class="demo-link" target="_blank">Try it yourself → vacprotocol.org/compare</a>
   </div>
@@ -839,17 +856,23 @@ footer a:hover { color: var(--teal); }
     <h2>Three compounding network effects</h2>
     <div class="moat-grid">
       <div class="moat-card">
-        <div class="moat-icon">📊</div>
+        <div class="moat-icon moat-icon-trust">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="5" cy="18" r="2"/><circle cx="19" cy="18" r="2"/><line x1="6.7" y1="7.5" x2="10.5" y2="10.5"/><line x1="17.3" y1="7.5" x2="13.5" y2="10.5"/><line x1="6.7" y1="16.5" x2="10.5" y2="13.5"/><line x1="17.3" y1="16.5" x2="13.5" y2="13.5"/></svg>
+        </div>
         <h3>Trust Graph</h3>
         <p>Every comparison enriches the trust graph. More queries mean more accurate model rankings per domain. The graph compounds — it gets smarter with every use.</p>
       </div>
       <div class="moat-card">
-        <div class="moat-icon">🧠</div>
+        <div class="moat-icon moat-icon-reasoning">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </div>
         <h3>Reasoning Index</h3>
         <p>Reasoning paths accumulate as reusable intelligence. Common workflows get indexed, searchable, and eventually trainable. The index is the asset.</p>
       </div>
       <div class="moat-card">
-        <div class="moat-icon">🔒</div>
+        <div class="moat-icon moat-icon-profile">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
         <h3>Personal Trust Profiles</h3>
         <p>Your trust profile and local models don't exist anywhere else. Per-user personalisation creates switching costs — your data trains models that work for you.</p>
       </div>
