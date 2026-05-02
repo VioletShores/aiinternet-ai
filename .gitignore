@@ -1,0 +1,25 @@
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# gstack tooling cache
+.gstack/
+
+# Build artifacts
+node_modules/
+dist/
+build/
+
+# PDF build intermediates (kept by name when shipped, not by glob)
+# (origin-story.pdf is committed; build-pdf.py and venv live outside repo)
+
+# Credential files (L-424)
+*.pat
+*.token
+GitHub_pat.md
+.env
+.env.*
+!.env.example
