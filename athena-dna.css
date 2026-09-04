@@ -495,6 +495,32 @@ footer {
   width: 100%;
 }
 
+/* Cross-site stack nav — canonical teal->emerald->blue gradient,
+   shared across aiinternet.ai / athenapilot.ai / vacprotocol.org footers */
+.stack-nav {
+  max-width: var(--max-width); margin: 0 auto 24px; padding-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+}
+.stack-nav-label {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--text3);
+}
+.stack-nav-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: linear-gradient(90deg, #2DD4BF, #10B981, #3B82F6);
+}
+.stack-nav-links { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.stack-nav-links a {
+  font-family: var(--mono); font-size: 12px; padding: 5px 12px; border-radius: 999px;
+  border: 1px solid rgba(45,212,191,0.35);
+  background: linear-gradient(90deg, rgba(45,212,191,0.10), rgba(16,185,129,0.10), rgba(59,130,246,0.10));
+  color: var(--text2);
+  transition: border-color 0.2s, color 0.2s;
+}
+.stack-nav-links a:hover { border-color: #2DD4BF; color: #fff; }
+.stack-nav-links a.current { color: #2DD4BF; border-color: #2DD4BF; }
+
 
 /* ═══════════════════════════════════════════════
    UTILITIES
