@@ -496,7 +496,10 @@ footer {
 }
 
 /* Cross-site stack nav — canonical teal->emerald->blue gradient,
-   shared across aiinternet.ai / athenapilot.ai / vacprotocol.org footers */
+   shared across aiinternet.ai / athenapilot.ai / vacprotocol.org footers.
+   4 copies exist (dark theme here + athenapilot-ai/athena-dna.css; light-theme
+   inline variants in vac-web/index.html + Schemo512/vacprotocol.org/index.html)
+   — no shared stylesheet across repos, so update all 4 in lockstep. */
 .stack-nav {
   max-width: var(--max-width); margin: 0 auto 24px; padding-bottom: 24px;
   border-bottom: 1px solid var(--border);
