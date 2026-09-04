@@ -6,6 +6,13 @@ the task brief — plus `VioletShores/vac-web`, discovered mid-task to be the ac
 vacprotocol.org (see Finding 1 below).
 **Branch used in every repo:** `site-cleanup-s185` (pushed, **not** merged to `main` — see Authorization note).
 
+**Self-review:** ran a multi-angle diff review (line-by-line, removed-behavior, cross-file consistency,
+cleanup/conventions) across all four repos' diffs before calling this done. Found and fixed 5 real issues in
+follow-up commits on the same branches: a stale "Athena OS" link left in aiinternet-ai's footer after the
+athenapilot-ai rebrand, the same stale label in athenapilot-ai's own README, a `color: ... !important` in the
+vac-web/Schemo512 stack-nav that silently prevented any hover/current text-color change, and the illustrative
+receipt-panel example lacking a clear "example, not live" eyebrow next to genuinely-live demo cards.
+
 ---
 
 ## 0. Blockers / discrepancies found before doing the work
